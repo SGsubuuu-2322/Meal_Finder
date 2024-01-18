@@ -42,4 +42,25 @@ function searchMeal(e) {
   }
 }
 
+function getMealById(mealId) {
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const meal = data.meals[0];
+      console.log(meal);
+    });
+}
+
 submit.addEventListener("submit", searchMeal);
+
+mealsEl.addEventListener("click", (e) => {
+  const mealInfo = e.composedPath().find((item) => {
+    if (item.classList) {
+      return item.classList.contains("meal-info");
+    } else {
+      return false;
+    }
+  });
+  const mealId = mealInfo.getAttribute("data-mealid");
+  getMealById(mealId);
+});
