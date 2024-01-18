@@ -19,9 +19,10 @@ function searchMeal(e) {
         if (data.meals === null) {
           mealsEl.innerHTML = `<p>There no search results. Try again! </p>`;
         } else {
-          mealsEl.innerHTML = data.meals.map(
-            (meal) =>
-              `
+          mealsEl.innerHTML = data.meals
+            .map(
+              (meal) =>
+                `
             <div class="meal">
                 <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
                 <div class="meal-info" data-mealId = "${meal.idMeal}">
@@ -31,10 +32,11 @@ function searchMeal(e) {
             </div>
             
             `
-          );
-          search.value = "";
+            )
+            .join("");
         }
       });
+    search.value = "";
   } else {
     alert("Please enter something to seach for you meal....");
   }
