@@ -15,7 +15,25 @@ function searchMeal(e) {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        result_heading.innerHTML = `<h2>Search results for '${term}': </h2>`;
+        if (data.meals === null) {
+          mealsEl.innerHTML = `<p>There no search results. Try again! </p>`;
+        } else {
+          mealsEl.innerHTML = data.meals.map(
+            (meal) =>
+              `
+            <div class="meal">
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+                <div class="meal-info" data-mealId = "${meal.idMeal}">
+                 <h3>${meal.strMeal}</h3>
+                </div>
+
+            </div>
+            
+            `
+          );
+          search.value = "";
+        }
       });
   } else {
     alert("Please enter something to seach for you meal....");
