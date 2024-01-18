@@ -3,4 +3,4 @@ const search = document.getElementById("search"),
     random_Btn = document.getElementById("random"),
     result_heading = document.getElementById("result-heading"),
     mealsEl = document.getElementById("meals"),
-    singleMealEl = document.getElementById("meals");
+    single_mealEl = document.getElementById("single-meal");
