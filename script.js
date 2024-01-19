@@ -47,8 +47,26 @@ function getMealById(mealId) {
     .then((res) => res.json())
     .then((data) => {
       const meal = data.meals[0];
-      console.log(meal);
+      addMealToDom(meal);
     });
+}
+
+function addMealToDom(meal){
+  const ingredients = [];
+
+  for(let i = 0; i < 20; i++){
+    if(meal[`strIngredient${i}`]){
+      ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`);
+    }else{
+      break;
+    }
+  }
+
+  single_mealEl.innerHTML = `
+      <div class="single-meal">
+        <h2>${meal.strMeal}</h2>
+      </div>
+  `
 }
 
 submit.addEventListener("submit", searchMeal);
@@ -64,3 +82,4 @@ mealsEl.addEventListener("click", (e) => {
   const mealId = mealInfo.getAttribute("data-mealid");
   getMealById(mealId);
 });
+
